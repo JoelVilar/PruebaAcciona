@@ -40,11 +40,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid #ff0000;
   padding: 30px;
   border-radius: 5px;
 }

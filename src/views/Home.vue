@@ -5,7 +5,7 @@
 </template>
 <script>
 import ProfileList from '../components/profiles/ProfileList.vue'
-import * as ProfileService from '../controller/ProfileService.mjs'
+import * as ProfileService from '../controller/service/ProfileService.mjs'
 
 export default {
     name: 'Home',
@@ -20,6 +20,6 @@ export default {
     async created() {
         this.profiles = await ProfileService.getProfiles()
         console.log(this.profiles)
-    }
+    },
 }
 </script>
