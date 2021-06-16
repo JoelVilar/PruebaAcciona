@@ -1,7 +1,7 @@
 <template>
   <div class="container md-primary">
     <Header title="RANDOM USER GENERATOR"/>
-    <Home></Home>
+    <router-view></router-view>
     <Footer/>
   </div>
 </template>
@@ -9,13 +9,11 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from './components/Footer.vue';
-import Home from './views/Home.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    Home,
     Footer,
   },
 }

@@ -30,7 +30,9 @@
 
             <md-table-row :key="profile.login.uuid" v-for="profile in filteredProfiles">
                 <md-table-cell>{{profile.name.title}}</md-table-cell>
-                <md-table-cell>{{`${profile.name.first} ${profile.name.last}`}}</md-table-cell>
+                <md-table-cell>
+                    <router-link :to="{name:'profile', params:{ uuid : profile.login.uuid }}">{{`${profile.name.first} ${profile.name.last}`}}</router-link>
+                </md-table-cell>
                 <md-table-cell>{{profile.email}}</md-table-cell>
                 <md-table-cell>{{profile.nat}}</md-table-cell>
                 <md-table-cell>{{dateFormat(profile.dob.date)}}</md-table-cell>
