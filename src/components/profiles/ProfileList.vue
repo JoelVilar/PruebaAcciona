@@ -1,47 +1,64 @@
 <template>
     <div>
-        <input type="text" v-model="name" placeholder="Filter by name">
-        <input type="text" v-model="age" placeholder="Filter by age">
-        <select name="gender" id="gender" v-model="gender">
-            <option value="x">Filter by gender</option>
-            <option value="male">male</option>
-            <option value="female">female</option>
-        </select>
-        <thead>
-            <tr class="tHead">
-                    <td>Género</td>
-                    <td>Nombre</td>
-                    <td>Email</td>
-                    <td>Nacionalidad</td>
-                    <td>Fecha nacimiento</td>
-                    <td>Fecha registro</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr :key="profile.id" v-for="profile in filteredProfiles">
-                <ProfileItemList :profile = "profile"/>
-            </tr>
-        </tbody>
+        <md-table :if="profiles">
+            <md-table-toolbar>
+                <md-field class="md-toolbar-section-start">
+                    <label>Filter by name</label>
+                    <md-input type="text" v-model="name"></md-input>
+                </md-field>
+                <md-field class="md-toolbar-section-start">
+                    <label>Filter by age</label>
+                    <md-input dividerColor="accent" type="text" v-model="age"></md-input>
+                </md-field>
+                <md-field class="md-toolbar-section-end">
+                    <md-select v-model="gender" name="gender" id="gender">
+                        <md-option value="x">Filter by gender</md-option>
+                        <md-option value="male">Male</md-option>
+                        <md-option value="female">Female</md-option>
+                    </md-select>
+                </md-field>
+            </md-table-toolbar>
+            <md-table-row>
+                <md-table-head >Gender</md-table-head>
+                <md-table-head>Name</md-table-head>
+                <md-table-head>Email</md-table-head>
+                <md-table-head>Nationality</md-table-head>
+                <md-table-head>Date of birth</md-table-head>
+                <md-table-head>Registered</md-table-head>
+            </md-table-row>
+
+            <md-table-row :key="profile.login.uuid" v-for="profile in filteredProfiles">
+                <md-table-cell>{{profile.name.title}}</md-table-cell>
+                <md-table-cell>
+                    <router-link :to="{name:'profile', params:{ uuid : profile.login.uuid }}">{{`${profile.name.first} ${profile.name.last}`}}</router-link>
+                </md-table-cell>
+                <md-table-cell>{{profile.email}}</md-table-cell>
+                <md-table-cell>{{profile.nat}}</md-table-cell>
+                <md-table-cell>{{dateFormat(profile.dob.date)}}</md-table-cell>
+                <md-table-cell>{{dateFormat(profile.registered.date)}}</md-table-cell>
+            </md-table-row>
+        </md-table>
     </div>
 </template>
 <script>
-import ProfileItemList from './ProfileItemList.vue'
+import moment from 'moment'
 
 export default {
     name: 'ProfileList',
     props: {
         profiles: Array,
-
-    },
-    components: {
-        ProfileItemList,
     },
     data(){
         return {
             name : '',
-            age: 0,
+            age: '',
             gender: 'x',
         }
+    },
+    methods:{
+        dateFormat(value) {
+            return moment(value).format('dd/MM/yyyy')
+        },
     },
     computed: {
         filteredProfiles: function () {
@@ -56,9 +73,15 @@ export default {
 }
 </script>
 <style scoped>
-    td{
-        border-bottom: 5px solid green;
-        margin: 50px;
+    th{
+        border-bottom: 2px ridge #ff0000;
+    }
+    tr{
+        transition: 150ms;
+    }
+    tr:hover{
+        border-left: 1px ridge #ff0000;
+        color: #ff0000;
     }
     input,
     select{

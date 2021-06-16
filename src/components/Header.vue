@@ -14,8 +14,17 @@ export default {
 <style scoped>
     header{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        margin-bottom: 20px;
+        padding: 50px;
+        margin-bottom: 70px;
+        background: radial-gradient(
+            circle at 33% 100%,
+            #fed373 4%,
+            #f15245 30%,
+            #d92e7f 62%,
+            #9b36b7 85%,
+            #515ecf);
+        ;
     }
 </style>

@@ -1,21 +1,22 @@
 <template>
-  <div class="container md-primary">
-    <Header title="RANDOM USER GENERATOR"/>
-    <Home></Home>
+  <div>
+    <Header title="PRUEBA ACCIONA JOEL VILAR"/>
+    <div class="container md-primary">
+      <router-view></router-view>
+    </div>
     <Footer/>
   </div>
+  
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from './components/Footer.vue';
-import Home from './views/Home.vue';
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Home,
     Footer,
   },
 }
@@ -40,11 +41,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid #ff0000;
   padding: 30px;
   border-radius: 5px;
 }
