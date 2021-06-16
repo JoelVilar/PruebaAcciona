@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="coordinates">
         <gmap-map :center="coordinates" :zoom="7" style="width: 400px; height: 300px;">
             <gmap-marker :position="coordinates"></gmap-marker>
         </gmap-map>

@@ -1,12 +1,17 @@
 <template>
     <div>
+        <section>
+            <md-button class="md-accent md-raised" @click="goTo()">GO TO HOME</md-button>
+        </section>
         <md-field class="md-toolbar-section-end">
             <label for="">Listas de favoritos</label>
             <md-select v-model="choosenList" name="favs" id="favs">
                 <md-option :key="list.name" v-for="list in favList" :value="list.data">{{list.name}}</md-option>
             </md-select>
         </md-field>
-        <ProfileList :profiles ="choosenList" />
+        <div :v-if="choosenList.lenght>0">
+            <ProfileList :profiles = "choosenList" />
+        </div>
         <md-button class="md-primary md-raised" @click="downloadCSV()">DOWNLOAD CSV</md-button>
     </div>
 </template>
@@ -50,6 +55,9 @@ export default {
             link.setAttribute("download", "my_data.csv");
             link.click();
         },
+        goTo(){
+            this.$router.push({ name: 'Home'})
+        },
     },  
 }
 </script>
@@ -68,5 +76,10 @@ export default {
     select{
         padding: 5px;
         margin: 5px;
+    }
+    section{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
     }
 </style>

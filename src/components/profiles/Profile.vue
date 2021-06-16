@@ -1,12 +1,15 @@
 <template>
     <div>
+        <div class="home-button">
+            <md-button class="md-accent md-raised" @click="goTo()">GO TO HOME</md-button>
+        </div>
         <md-card >
             <md-card-header>
-                <section>
+                <section v-if="profile">
                     <md-card-media md-big>
                         <img :src="profile.picture ? profile.picture.large : ''" alt="Profile">
                     </md-card-media>
-                    <Map :if="profile.location.coordinates" :coordinates="coordinates"></Map>
+                    <Map v-if="coordinates" :coordinates="coordinates"></Map>
                     <md-card-actions>
                         <md-dialog-prompt
                             @input="favs()"
@@ -27,7 +30,7 @@
                     <div class="md-title">{{profile.name.title}} {{profile.name.first}} {{profile.name.last}}</div>
                     <div class="md-subhead">{{profile.email}}</div>
             </md-card-content>
-            <md-card-content :if="profile.location">
+            <md-card-content v-if="profile.location">
                 <div class="md-title">Contact</div>
                 <div class="md-subhead">{{profile.location.street.name}} ({{profile.location.street.number}}), {{profile.location.city}} ({{profile.location.state}}), {{profile.location.country}}</div>
                 <div class="md-subhead">Tlf: {{profile.phone}}</div>
@@ -72,10 +75,17 @@ export default {
             })
             this.alertActive = true
         },
+        goTo(){
+            this.$router.push({ name: 'Home'})
+        }
     },
 }
 </script>
 <style scoped>
+    .home-button{
+        display:flex;
+        justify-content: flex-end;
+    }
     section{
         width: 100%;
         display: flex;
