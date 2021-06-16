@@ -1,7 +1,6 @@
 <template>
     <div>
-        
-        <md-table>
+        <md-table :if="profiles">
             <md-table-toolbar>
                 <md-field class="md-toolbar-section-start">
                     <label>Filter by name</label>

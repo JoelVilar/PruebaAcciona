@@ -8,7 +8,18 @@
                     </md-card-media>
                     <Map :if="profile.location.coordinates" :coordinates="coordinates"></Map>
                     <md-card-actions>
-                        <md-button @click="favs()">Add to Favs</md-button>
+                        <md-dialog-prompt
+                            @input="favs()"
+                            :md-active.sync="dialogActive"
+                            v-model="favListName"
+                            md-title="Write the name of the list where you want to save the profile"
+                            md-input-maxlength="30"
+                            md-input-placeholder="Type the name..."
+                            md-confirm-text="Done" />
+                        <md-dialog-alert
+                            :md-active.sync="alertActive"
+                            :md-content="alertValue"/>
+                        <md-button class="md-accent md-raised" @click="dialogActive = true">Add to Favs</md-button>
                     </md-card-actions>
                 </section>
             </md-card-header>
@@ -40,6 +51,10 @@ export default {
         return {
             profile : Object,
             coordinates: Object,
+            dialogActive: false,
+            alertActive: false,
+            alertValue: '',
+            favListName:''
         }
     },
     async created(){
@@ -51,11 +66,11 @@ export default {
     },
     methods: {
         async favs(){
-            const favListName = prompt("Write the name of the list where you want to save the profile")
-            await profileService.saveProfileInList({
-                name: favListName,
+            this.alertValue = await profileService.saveProfileInList({
+                name: this.favListName,
                 profile: this.profile
             })
+            this.alertActive = true
         },
     },
 }

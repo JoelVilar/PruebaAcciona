@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Profile from '../components/profiles/Profile'
 import Home from '../views/Home'
+import Fav from '../views/Fav'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
         name: 'profile',
         component: Profile,
         props : true,
+    },
+    {
+        path: '/favs',
+        name: 'favs',
+        component: Fav,
     },
 ]
 

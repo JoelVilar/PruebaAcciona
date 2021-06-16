@@ -1,14 +1,17 @@
 <template>
-  <div class="container md-primary">
-    <Header title="RANDOM USER GENERATOR"/>
-    <router-view></router-view>
+  <div>
+    <Header title="PRUEBA ACCIONA JOEL VILAR"/>
+    <div class="container md-primary">
+      <router-view></router-view>
+    </div>
     <Footer/>
   </div>
+  
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from './components/Footer.vue';
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
