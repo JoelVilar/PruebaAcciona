@@ -8,7 +8,7 @@
                     </md-card-media>
                     <Map :if="profile.location.coordinates" :coordinates="coordinates"></Map>
                     <md-card-actions>
-                        <md-button>Add to Favs</md-button>
+                        <md-button @click="favs()">Add to Favs</md-button>
                     </md-card-actions>
                 </section>
             </md-card-header>
@@ -48,7 +48,16 @@ export default {
             lat: parseFloat(this.profile.location.coordinates.latitude),
             lng: parseFloat(this.profile.location.coordinates.longitude)
         }
-    }
+    },
+    methods: {
+        async favs(){
+            const favListName = prompt("Write the name of the list where you want to save the profile")
+            await profileService.saveProfileInList({
+                name: favListName,
+                profile: this.profile
+            })
+        },
+    },
 }
 </script>
 <style scoped>
